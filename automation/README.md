@@ -66,6 +66,25 @@ around store-visit/local goals (or a dedicated local campaign) so Maps
 and local surfaces get the budget that display burns today, and pursue
 Store Visits conversion eligibility with Google.
 
+## Store-goal restructure — 2026-08-07 (user-approved)
+
+Root cause found in `campaign_conversion_goal`: only the two
+PHONE_CALL_LEAD goals were `biddable`. The GET_DIRECTIONS and CONTACT
+goals — the store-intent signals — were observation-only, so smart
+bidding never optimized toward getting anyone directions to the store.
+
+**Applied** via `campaignConversionGoals:mutate` (both confirmed 200):
+
+- `23594873021~GET_DIRECTIONS~GOOGLE_HOSTED` → `biddable: true`
+- `23594873021~CONTACT~GOOGLE_HOSTED` → `biddable: true`
+
+Campaign now bids toward calls + directions + contact together —
+i.e. store goals. Remaining follow-ups (pending tool approval in the
+session): re-verify goal state, audit asset-group final URLs, and
+monitor whether Maps/local serving picks up over the next 1–2 weeks
+(`plan` run: watch the Spend-by-network section for CONTENT share
+falling and local actions starting to record).
+
 ## Usage
 
 Requires a configured `google-ads.yaml` (developer token, OAuth
