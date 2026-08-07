@@ -74,6 +74,7 @@ class AccountSnapshot:
     campaigns: list = field(default_factory=list)
     conversion_actions: list = field(default_factory=list)
     conversion_breakdown: list = field(default_factory=list)
+    network_split: list = field(default_factory=list)
 
 
 def fetch_snapshot(client, customer_id):
@@ -132,6 +133,18 @@ def fetch_snapshot(client, customer_id):
         customer_id=customer_id, query=breakdown_query
     ):
         snapshot.conversion_breakdown.append(row)
+
+    network_query = f"""
+        SELECT
+          segments.ad_network_type,
+          metrics.clicks,
+          metrics.impressions,
+          metrics.cost_micros
+        FROM campaign
+        WHERE segments.date DURING {LOOKBACK}
+    """
+    for row in ga_service.search(customer_id=customer_id, query=network_query):
+        snapshot.network_split.append(row)
 
     return snapshot
 
@@ -245,6 +258,15 @@ def print_audit(snapshot):
             action.type_.name,
             action.category.name,
             action.primary_for_goal,
+        )
+    logger.info("--- Spend by network ---")
+    for row in snapshot.network_split:
+        logger.info(
+            "  %s: $%.2f (%s clicks, %s impressions)",
+            row.segments.ad_network_type.name,
+            row.metrics.cost_micros / 1e6,
+            row.metrics.clicks,
+            row.metrics.impressions,
         )
     logger.info("--- 30d conversions by action ---")
     if not snapshot.conversion_breakdown:

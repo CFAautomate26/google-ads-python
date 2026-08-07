@@ -38,6 +38,34 @@ Conversions bidding).
    to budget (~78% is lost to ad rank), so raising the $20/day budget is
    NOT currently proposed — the budget rule only fires above 10% lost IS.
 
+## Local-conversion diagnosis — 2026-08-07
+
+Applied same day (user-approved): **removed the $111 target CPA** on
+CFA London-Search; the campaign now runs unconstrained Maximize
+Conversions. Verified via follow-up query.
+
+Why "Local actions - Directions" / "Clicks to call" never fire:
+
+- **Location plumbing is fine.** A `LOCATION_SYNC` asset set (Business
+  Profile store #30029) is linked at the customer level, and the campaign
+  carries CALL, LOGO, BUSINESS_NAME, and 6 SITELINK assets.
+- **The spend goes to the wrong surfaces.** Last-30d network split:
+  Search $257.64 (493 clicks, 5.3k imp), **Display/Content $99.35
+  (435 clicks, 37.7k imp)**, YouTube $4.78, partners negligible. ~27% of
+  budget buys display clicks with near-zero visit intent, and the
+  campaign shows no meaningful Maps/local serving — 0 ad-attributed
+  local actions in 12 months.
+- **GBP interactions do happen organically**: trailing 12 months show
+  Business profile - Call 16, Tracked call 3, Directions 1, Calls from
+  ads 2 — all system-managed actions that can't be used as primary
+  bidding signals via the API.
+- Geo targeting is correct: 15 km proximity around the store.
+
+Recommended next moves (not yet applied): re-shape the PMax campaign
+around store-visit/local goals (or a dedicated local campaign) so Maps
+and local surfaces get the budget that display burns today, and pursue
+Store Visits conversion eligibility with Google.
+
 ## Usage
 
 Requires a configured `google-ads.yaml` (developer token, OAuth
