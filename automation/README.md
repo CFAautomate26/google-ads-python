@@ -118,3 +118,28 @@ python automation/conversion_spend_maximizer.py apply -c 9053151764 \
 Run `plan` on a daily/weekly schedule and review the output; run `apply`
 manually after reviewing. The script exits non-zero on API errors so it is
 cron/CI friendly.
+
+## Two-week re-audit — 2026-08-21 (last 14 days vs 2026-08-07 baseline)
+
+Scheduled check-in results for campaign 23594873021:
+
+| Metric | Baseline (30d, pre-change) | Re-audit (14d, post-change) |
+| --- | --- | --- |
+| Display/CONTENT spend share | ~27% (~$99/30d) | **$0 — eliminated** |
+| Search spend | $258/30d | $284/14d (full $20/day now on Search) |
+| Search impression share | 16.7% | **27.2%** |
+| IS lost to budget | 4.7% | **23.3% — budget now the binding constraint** |
+| Primary conversions | 0 | **1** (Business profile - Tracked call) |
+| Ad-attributed directions | 0 | 0 (still) |
+
+Config verified intact: Maximize Conversions with no tCPA; PHONE_CALL_LEAD,
+GET_DIRECTIONS (GOOGLE_HOSTED), and CONTACT (GOOGLE_HOSTED) goals all
+`biddable: true`.
+
+Verdict: the restructure is working — display bleed is gone, search reach
+is up ~63%, and the first primary conversion has recorded. The dedicated
+local-campaign escalation is NOT triggered (Display 0% < 25% threshold).
+The automation's budget rule now fires instead: 23.3% budget-lost IS >
+10% threshold → proposed +20% step, $20/day → $24/day (pending Joshua's
+approval). Directions conversions remain the open gap to watch at the
+next check.
