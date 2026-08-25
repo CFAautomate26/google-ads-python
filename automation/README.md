@@ -143,3 +143,11 @@ The automation's budget rule now fires instead: 23.3% budget-lost IS >
 10% threshold → proposed +20% step, $20/day → $24/day (pending Joshua's
 approval). Directions conversions remain the open gap to watch at the
 next check.
+
+### Budget step applied — 2026-08-21 (user-approved)
+
+Per the +20% guardrail (23.3% budget-lost IS > 10% threshold), raised
+campaignBudgets/15385537187 from $20.00/day to **$24.00/day** via
+`campaignBudgets:mutate`; re-read at apply time and verified after
+(amountMicros 24000000). Next check: confirm budget-lost IS falls,
+watch for first ad-attributed directions conversions.
