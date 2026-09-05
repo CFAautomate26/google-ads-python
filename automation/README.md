@@ -151,3 +151,27 @@ campaignBudgets/15385537187 from $20.00/day to **$24.00/day** via
 `campaignBudgets:mutate`; re-read at apply time and verified after
 (amountMicros 24000000). Next check: confirm budget-lost IS falls,
 watch for first ad-attributed directions conversions.
+
+## Post-budget-step audit — 2026-09-05 (last 14 days: Aug 22 – Sep 4)
+
+Config intact: $24/day budget, Maximize Conversions, no tCPA.
+
+| Metric | Aug 21 re-audit | Sep 5 audit |
+| --- | --- | --- |
+| Search impression share | 27.2% | **31.0%** |
+| IS lost to budget | 23.3% | 22.2% (flat) |
+| Avg daily spend | ~$20.3 (at cap) | ~$21.2 (below $24 cap) |
+| Search share of spend | ~99.8% | ~98% (Display still ~$0) |
+| Primary conversions (14d) | 1 | **0** |
+| All conversions (14d) | 2 | 1 (Business profile - Call) |
+| Ad-attributed directions | 0 | 0 |
+
+Read: the structural wins hold (no display bleed, reach still climbing),
+but the +20% budget step is NOT fully consumed (avg $21.2 < $24 cap;
+budget-lost IS is peak-hour pacing, not day-level starvation) and primary
+conversions fell back to zero. The >10% budget rule technically fires
+again, but raising spend while measurable conversions are ~1 per
+fortnight is not justified — the binding constraint is measurement, not
+reach. Recommendation recorded: HOLD budget at $24/day; next lever is
+conversion measurement (Store Visits eligibility, offline conversion
+import of app/online orders, or a dedicated local campaign), not budget.
