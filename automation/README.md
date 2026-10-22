@@ -175,3 +175,19 @@ fortnight is not justified — the binding constraint is measurement, not
 reach. Recommendation recorded: HOLD budget at $24/day; next lever is
 conversion measurement (Store Visits eligibility, offline conversion
 import of app/online orders, or a dedicated local campaign), not budget.
+
+## Incrementality (on/off) test — started 2026-10-22 (user-approved)
+
+Oct 22 audit (30d): $708 spend at $24/day, 747 clicks, avg CPC $0.95
+(2.4x August), search IS down to 20.3%, 18 measurable actions (~$39
+each) — measured ROI negative; tracking prerequisites (customer data
+terms, enhanced conversions) remain user-gated (API mutate refused:
+developer lacks CustomerService permission).
+
+Decision instrument: on/off test against POS sales.
+- **Oct 22 – Nov 4**: campaign 23594873021 PAUSED (applied + verified).
+- **Nov 5 – 18**: resumed (scheduled, trig_01P9Jm9kuhnXU4YwQiLu8vn5).
+- **Nov 19**: comparison report (trig_01664yb85dHH7Zt4SSUntQNJ) — ad
+  metrics + GBP organic baseline both windows; Joshua compares POS daily
+  sales. Decision rule: no sales dip while dark → cut spend; visible
+  dip → ads retained.
